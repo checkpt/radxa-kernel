@@ -605,13 +605,22 @@
 	};
 };
 
+&i2c1 {
+	status = "okay";
+};
+
+&i2c2 {
+	status = "okay";
+	pinctrl-0 = <&i2c2m0_xfer>;
+};
+
 &i2c3 {
 	status = "okay";
-	pinctrl-0 = <&i2c3m1_xfer>;	
+	pinctrl-0 = <&i2c3m0_xfer>;
 };
 
 &i2c5 {
-	status = "okay";	
+	status = "okay";
 	pinctrl-0 = <&i2c5m0_xfer>;
 
 	hym8563: hym8563@51 {
@@ -626,6 +635,20 @@
 		interrupt-parent = <&gpio0>;
 		interrupts = <27 IRQ_TYPE_LEVEL_LOW>;
 	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&uart5 {
+	status = "okay";
+	pinctrl-0 = <&uart5m1_xfer>;
+};
+
+&uart7 {
+	status = "okay";
+	pinctrl-0 = <&uart7m1_xfer>;
 };
 
 &uart8 {
@@ -810,6 +833,23 @@
 
 &sfc {
 	status = "okay";
+};
+
+&spi3 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	pinctrl-names = "default", "high_speed";
+	pinctrl-0 = <&spi3m1_cs0 &spi3m1_cs1 &spi3m1_pins>;
+	pinctrl-1 = <&spi3m1_cs0 &spi3m1_cs1 &spi3m1_pins_hs>;
+	max-freq = <50000000>;
+
+	spidev@0 {
+		compatible = "rockchip,spidev";
+		status = "okay";
+		reg = <0>;
+		spi-max-frequency = <50000000>;
+	};
 };
 
 &tsadc {
@@ -1025,7 +1065,7 @@
 &pcie3x1 {
 	rockchip,bifurcation;
 	reset-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-	pinctrl-0 = <&pcie30x1m1_pins>; 
+	pinctrl-0 = <&pcie30x1m1_pins>;
 	vpcie3v3-supply = <&pcie30_3v3>;
 	status = "disabled";
 };
