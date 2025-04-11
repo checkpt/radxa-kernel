@@ -606,9 +606,28 @@
 	status = "okay";
 };
 
+&i2c4 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c4m0_xfer>;
+
+	ds1307@68 {
+		compatible = "dallas,ds1307";
+		reg = <0x68>;
+		status = "okay";
+	};
+
+	tmp100@48 {
+		compatible = "ti,tmp100";
+		reg = <0x48>;
+		status = "okay";
+	};
+};
+
 &i2c3 {
 	status = "okay";
-	pinctrl-0 = <&i2c3m1_xfer>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c3m0_xfer>;
 
 	usbc0: fusb302@22 {
 		compatible = "fcs,fusb302";
@@ -619,7 +638,28 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&usbc0_int>;
 	};
+
+	ds1307@68 {
+		compatible = "dallas,ds1307";
+		reg = <0x68>;
+		status = "okay";
+	};
  };
+
+&uart4 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart4m1_xfer>;
+	dma-names = "tx", "rx";
+};
+
+&uart5 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart5m1_xfer>;
+	dma-names = "tx", "rx";
+};
+
 
 &reserved_memory {
 	ramoops: ramoops@110000 {
